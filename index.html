@@ -1,19 +1,27 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>NOVA | 高端创意工作室</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diyabao | 低压组织网络访问服务设计</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #1a1a1a;
-      --secondary: #f5f5f5;
-      --accent: #d4af37; /* 金色，高级感关键 */
-      --text: #222;
-      --light-text: #777;
-      --white: #ffffff;
-      --shadow: 0 4px 20px rgba(0,0,0,0.08);
+      --primary: #0a0a0a;
+      --secondary: #1a1a1a;
+      --accent: #ff6b6b;
+      --accent2: #4ecdc4;
+      --accent3: #ffd166;
+      --text: #f8f9fa;
+      --gradient1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --gradient2: linear-gradient(45deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+      --gradient3: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+      --gradient4: linear-gradient(90deg, #ff9a9e, #fad0c4, #a1c4fd, #c2e9fb);
+      --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      --glass: rgba(255, 255, 255, 0.1);
+      --glass-border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     * {
@@ -24,34 +32,78 @@
 
     body {
       font-family: 'Inter', sans-serif;
+      background: var(--gradient1);
       color: var(--text);
-      background-color: var(--white);
-      line-height: 1.6;
+      min-height: 100vh;
       overflow-x: hidden;
     }
 
-    h1, h2, h3, h4 {
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
-    }
-
     .container {
-      width: 90%;
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
+      padding: 0 2rem;
     }
 
-    /* —— 导航栏 —— */
+    /* 背景装饰元素 */
+    .bg-decor {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .bg-circle {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.3;
+    }
+
+    .circle-1 {
+      width: 400px;
+      height: 400px;
+      background: var(--gradient2);
+      top: 10%;
+      left: 10%;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .circle-2 {
+      width: 300px;
+      height: 300px;
+      background: var(--gradient3);
+      bottom: 10%;
+      right: 10%;
+      animation: float 8s ease-in-out infinite reverse;
+    }
+
+    .circle-3 {
+      width: 250px;
+      height: 250px;
+      background: var(--accent3);
+      top: 50%;
+      right: 20%;
+      animation: float 7s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(180deg); }
+    }
+
+    /* 导航栏 */
     nav {
       position: fixed;
       top: 0;
-      left: 0;
       width: 100%;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
+      padding: 1.5rem 0;
       z-index: 1000;
-      padding: 1.2rem 0;
-      box-shadow: 0 1px 10px rgba(0,0,0,0.05);
+      backdrop-filter: blur(20px);
+      background: var(--glass);
+      border-bottom: var(--glass-border);
     }
 
     .nav-container {
@@ -61,153 +113,247 @@
     }
 
     .logo {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--primary);
-      text-decoration: none;
-    }
-
-    .logo span {
-      color: var(--accent);
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 900;
+      background: var(--gradient4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .nav-links {
       display: flex;
-      gap: 2rem;
+      gap: 2.5rem;
     }
 
     .nav-links a {
-      text-decoration: none;
       color: var(--text);
-      font-weight: 500;
-      transition: color 0.3s;
+      text-decoration: none;
+      font-weight: 600;
+      position: relative;
+      padding: 0.5rem 0;
+      transition: all 0.3s ease;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient4);
+      transition: width 0.3s ease;
     }
 
     .nav-links a:hover {
-      color: var(--accent);
+      color: var(--accent3);
     }
 
-    /* —— 英雄区域 —— */
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* 英雄区域 */
     .hero {
       height: 100vh;
       display: flex;
       align-items: center;
-      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1507238691740-38f1a68e50fc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
-      color: var(--white);
-      text-align: center;
+      justify-content: center;
+      position: relative;
       padding-top: 80px;
     }
 
     .hero-content {
+      text-align: center;
       max-width: 800px;
-      margin: 0 auto;
+      z-index: 10;
     }
 
     .hero h1 {
-      font-size: 4rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 4.5rem;
+      font-weight: 900;
       margin-bottom: 1.5rem;
       line-height: 1.1;
+      background: linear-gradient(45deg, #fff, var(--accent3), #fff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientShift 3s ease-in-out infinite;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
     }
 
     .hero p {
-      font-size: 1.25rem;
-      margin-bottom: 2rem;
+      font-size: 1.3rem;
+      margin-bottom: 3rem;
       opacity: 0.9;
     }
 
-    .btn {
+    .cta-button {
       display: inline-block;
-      padding: 0.8rem 2rem;
-      background: var(--accent);
-      color: var(--white);
-      text-decoration: none;
-      font-weight: 600;
-      border-radius: 30px;
-      transition: all 0.3s ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4);
-    }
-
-    /* —— 服务板块 —— */
-    .services {
-      padding: 6rem 0;
-      background: var(--secondary);
-    }
-
-    .section-title {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-
-    .section-title h2 {
-      font-size: 2.5rem;
+      padding: 1rem 3rem;
+      background: var(--gradient4);
       color: var(--primary);
+      text-decoration: none;
+      font-weight: 700;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow);
+      border: none;
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 30px 60px -15px rgba(255, 209, 102, 0.4);
+    }
+
+    /* 服务区域 */
+    .services {
+      padding: 8rem 0;
+      position: relative;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 5rem;
+    }
+
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      background: var(--gradient4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 3rem;
+    }
+
+    .service-card {
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      border: var(--glass-border);
+      border-radius: 20px;
+      padding: 3rem;
+      text-align: center;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--gradient4);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: -1;
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow);
+    }
+
+    .service-card:hover::before {
+      opacity: 0.1;
+    }
+
+    .service-icon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      background: var(--gradient4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .service-card h3 {
+      font-size: 1.5rem;
       margin-bottom: 1rem;
     }
 
-    .cards {
+    /* 作品展示 */
+    .portfolio {
+      padding: 8rem 0;
+      background: var(--secondary);
+      position: relative;
+    }
+
+    .portfolio-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
     }
 
-    .card {
-      background: var(--white);
-      padding: 2.5rem;
-      border-radius: 12px;
+    .portfolio-item {
+      border-radius: 15px;
+      overflow: hidden;
+      position: relative;
+      height: 300px;
       box-shadow: var(--shadow);
-      transition: transform 0.3s;
     }
 
-    .card:hover {
-      transform: translateY(-8px);
+    .portfolio-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
     }
 
-    .card h3 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      color: var(--primary);
+    .portfolio-item:hover img {
+      transform: scale(1.1);
     }
 
-    /* —— 客户评价 —— */
-    .testimonials {
-      padding: 6rem 0;
+    .portfolio-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      display: flex;
+      align-items: flex-end;
+      padding: 1.5rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
-    .testimonial {
-      max-width: 700px;
-      margin: 0 auto;
-      text-align: center;
+    .portfolio-item:hover .portfolio-overlay {
+      opacity: 1;
     }
 
-    .testimonial p {
-      font-size: 1.2rem;
-      font-style: italic;
-      margin-bottom: 1.5rem;
-    }
-
-    .client {
-      font-weight: 600;
-      color: var(--accent);
-    }
-
-    /* —— 联系区 —— */
+    /* 联系区域 */
     .contact {
-      padding: 6rem 0;
-      background: var(--primary);
-      color: var(--white);
-    }
-
-    .contact .section-title h2 {
-      color: var(--white);
+      padding: 8rem 0;
+      position: relative;
     }
 
     .contact-form {
       max-width: 600px;
       margin: 0 auto;
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      border: var(--glass-border);
+      border-radius: 20px;
+      padding: 3rem;
     }
 
     .form-group {
@@ -217,102 +363,165 @@
     .form-group input,
     .form-group textarea {
       width: 100%;
-      padding: 0.8rem;
-      border: none;
-      border-radius: 6px;
+      padding: 1rem;
+      background: rgba(255,255,255,0.1);
+      border: var(--glass-border);
+      border-radius: 10px;
+      color: var(--text);
       font-family: 'Inter', sans-serif;
+      font-size: 1rem;
     }
 
     .form-group textarea {
-      height: 120px;
+      height: 150px;
       resize: vertical;
     }
 
-    /* —— 页脚 —— */
+    /* 页脚 */
     footer {
-      background: #000;
-      color: #aaa;
-      padding: 2rem 0;
+      background: var(--primary);
+      padding: 3rem 0 2rem;
       text-align: center;
     }
 
-    /* —— 响应式 —— */
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .social-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 1.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: var(--accent3);
+    }
+
+    /* 响应式设计 */
     @media (max-width: 768px) {
       .hero h1 {
         font-size: 2.5rem;
       }
+      
       .nav-links {
-        display: none; /* 实际项目可加汉堡菜单 */
+        display: none;
+      }
+      
+      .services-grid,
+      .portfolio-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-content {
+        flex-direction: column;
       }
     }
   </style>
 </head>
 <body>
+  <!-- 背景装饰 -->
+  <div class="bg-decor">
+    <div class="bg-circle circle-1"></div>
+    <div class="bg-circle circle-2"></div>
+    <div class="bg-circle circle-3"></div>
+  </div>
 
-  <!-- 导航 -->
+  <!-- 导航栏 -->
   <nav>
     <div class="container nav-container">
-      <a href="#" class="logo">NOVA<span>.</span></a>
+      <div class="logo">LUMEN</div>
       <div class="nav-links">
+        <a href="#home">首页</a>
         <a href="#services">服务</a>
-        <a href="#testimonials">客户</a>
+        <a href="#portfolio">作品</a>
         <a href="#contact">联系</a>
       </div>
     </div>
   </nav>
 
-  <!-- 首屏英雄区 -->
-  <section class="hero">
+  <!-- 英雄区域 -->
+  <section id="home" class="hero">
     <div class="hero-content">
-      <h1>定义未来的高级体验</h1>
-      <p>我们融合艺术、技术与战略，为全球顶尖品牌打造独一无二的数字存在。</p>
-      <a href="#contact" class="btn">开启合作</a>
+      <h1>重新定义数字体验</h1>
+      <p>我们创造超越想象的视觉奇迹，融合艺术与技术，打造独一无二的数字体验</p>
+      <a href="#contact" class="cta-button">开始合作</a>
     </div>
   </section>
 
-  <!-- 服务 -->
+  <!-- 服务区域 -->
   <section id="services" class="services">
     <div class="container">
-      <div class="section-title">
-        <h2>我们的专长</h2>
-        <p>每一处细节，皆为卓越而生</p>
+      <div class="section-header">
+        <h2>我们的服务</h2>
+        <p>专业技能，无限创意</p>
       </div>
-      <div class="cards">
-        <div class="card">
-          <h3>品牌策略</h3>
-          <p>从定位到叙事，构建有灵魂的品牌体系，让价值深入人心。</p>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">🎨</div>
+          <h3>品牌设计</h3>
+          <p>从品牌定位到视觉识别，打造具有深度影响力的品牌形象</p>
         </div>
-        <div class="card">
-          <h3>高端网站开发</h3>
-          <p>极致性能 + 沉浸式体验，打造令人难忘的数字门户。</p>
+        <div class="service-card">
+          <div class="service-icon">💻</div>
+          <h3>网站开发</h3>
+          <p>高端定制网站，融合最新技术，创造卓越用户体验</p>
         </div>
-        <div class="card">
-          <h3>视觉设计</h3>
-          <p>以美学驱动商业，用视觉语言讲述品牌故事。</p>
+        <div class="service-card">
+          <div class="service-icon">📱</div>
+          <h3>移动应用</h3>
+          <p>原生与跨平台应用开发，打造流畅的移动体验</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 客户评价 -->
-  <section id="testimonials" class="testimonials">
+  <!-- 作品展示 -->
+  <section id="portfolio" class="portfolio">
     <div class="container">
-      <div class="section-title">
-        <h2>客户的声音</h2>
+      <div class="section-header">
+        <h2>精选作品</h2>
+        <p>创意与技术的完美结合</p>
       </div>
-      <div class="testimonial">
-        <p>“与 NOVA 合作是我们做过的最明智的决定。他们的专业度和审美水准，完全超出了我们的期待。”</p>
-        <div class="client">— 李明哲，Luxury Group CEO</div>
+      <div class="portfolio-grid">
+        <div class="portfolio-item">
+          <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="作品1">
+          <div class="portfolio-overlay">
+            <h4>品牌重塑项目</h4>
+          </div>
+        </div>
+        <div class="portfolio-item">
+          <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="作品2">
+          <div class="portfolio-overlay">
+            <h4>电商平台设计</h4>
+          </div>
+        </div>
+        <div class="portfolio-item">
+          <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="作品3">
+          <div class="portfolio-overlay">
+            <h4>移动应用界面</h4>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- 联系 -->
+  <!-- 联系区域 -->
   <section id="contact" class="contact">
     <div class="container">
-      <div class="section-title">
-        <h2>让我们一起创造非凡</h2>
-        <p>发送消息，24 小时内回复</p>
+      <div class="section-header">
+        <h2>联系我们</h2>
+        <p>让我们一起创造非凡</p>
       </div>
       <form class="contact-form">
         <div class="form-group">
@@ -322,9 +531,9 @@
           <input type="email" placeholder="电子邮箱" required>
         </div>
         <div class="form-group">
-          <textarea placeholder="项目需求或想法..."></textarea>
+          <textarea placeholder="您的需求或想法..."></textarea>
         </div>
-        <button type="submit" class="btn">发送咨询</button>
+        <button type="submit" class="cta-button">发送消息</button>
       </form>
     </div>
   </section>
@@ -332,11 +541,20 @@
   <!-- 页脚 -->
   <footer>
     <div class="container">
-      <p>&copy; 2025 NOVA Creative Studio. 保留所有权利。</p>
+      <div class="footer-content">
+        <div class="copyright">
+          <p>&copy; 2025 LUMEN Creative Studio. 保留所有权利.</p>
+        </div>
+        <div class="social-links">
+          <a href="#">Behance</a>
+          <a href="#">Dribbble</a>
+          <a href="#">Instagram</a>
+        </div>
+      </div>
     </div>
   </footer>
-
 </body>
 </html>
+
 
 
